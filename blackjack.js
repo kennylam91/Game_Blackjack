@@ -11,6 +11,7 @@ let player;
 let house;
 let dealer;
 let newDeck;
+let newDeckSource;
 NEW_GAME.onclick=function(){
     disableButton(NEW_GAME);
     enableButton(START_DEALING);
@@ -19,11 +20,14 @@ NEW_GAME.onclick=function(){
     dealer = new Dealer();
     player = new Player(player);
     house = new Player(house);
-    newDeck = ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah",
+    newDeck = ["2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac",
+        "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah",
         "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad",
-        "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac",
         "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
-    console.log(newDeck);
+    newDeckSource=["./card_deck/2C.jpg","./card_deck/3C.jpg","./card_deck/4C.jpg","./card_deck/5C.jpg","./card_deck/6C.jpg","./card_deck/7C.jpg","./card_deck/8C.jpg","./card_deck/9C.jpg","./card_deck/10C.jpg","./card_deck/JC.jpg","./card_deck/QC.jpg","./card_deck/KC.jpg","./card_deck/AC.jpg",
+        "./card_deck/2H.jpg","./card_deck/3H.jpg","./card_deck/4H.jpg","./card_deck/5H.jpg","./card_deck/6H.jpg","./card_deck/7H.jpg","./card_deck/8H.jpg","./card_deck/9H.jpg","./card_deck/10H.jpg","./card_deck/JH.jpg","./card_deck/QH.jpg","./card_deck/KH.jpg","./card_deck/AH.jpg",
+        "./card_deck/2D.jpg","./card_deck/3D.jpg","./card_deck/4D.jpg","./card_deck/5D.jpg","./card_deck/6D.jpg","./card_deck/7D.jpg","./card_deck/8D.jpg","./card_deck/9D.jpg","./card_deck/10D.jpg","./card_deck/JD.jpg","./card_deck/QD.jpg","./card_deck/KD.jpg","./card_deck/AD.jpg",
+        "./card_deck/2S.jpg","./card_deck/3S.jpg","./card_deck/4S.jpg","./card_deck/5S.jpg","./card_deck/6S.jpg","./card_deck/7S.jpg","./card_deck/8S.jpg","./card_deck/9S.jpg","./card_deck/10S.jpg","./card_deck/JS.jpg","./card_deck/QS.jpg","./card_deck/KS.jpg","./card_deck/AS.jpg",];
     PLAYER_CARD.innerHTML="";
     HOUSE_CARD.innerHTML="";
     PLAYER_POINT.innerHTML="";
@@ -40,7 +44,7 @@ DEAL_BUTTON.onclick = function () {
     dealer.calculateTotalPointFor(player);
     dealer.calculateFinalPointFor(player);
     PLAYER_CARD.innerHTML = player.cards_html;
-    PLAYER_POINT.innerHTML = player.final_point;
+    PLAYER_POINT.innerHTML = 'point= '+player.final_point;
     if(dealer.isTheHouseWin(house,player)){
         doAfterTheHouseWin();
         disableButton(DEAL_BUTTON);
@@ -71,7 +75,7 @@ HOLD_BUTTON.onclick = function () {
 
     dealer.calculateFinalPointFor(house);
     HOUSE_CARD.innerHTML = house.cards_html;
-    HOUSE_POINT.innerHTML = house.final_point;
+    HOUSE_POINT.innerHTML = 'point= '+house.final_point;
     if(dealer.isTheHouseWin(house,player)) doAfterTheHouseWin();
     if(!dealer.isTheHouseWin(house,player)) doAfterThePlayerWin();
 
@@ -81,7 +85,14 @@ HOLD_BUTTON.onclick = function () {
 
 function Card(value) {
     this.value = value;
-    this.html = '<div class="card">' + this.value + '</div>';
+    this.getHtml=function(){
+        index=newDeck.indexOf(this.value);
+        if(index!==-1)
+        return '<div class="card"><img alt="'+this.value+'" src="'+newDeckSource[newDeck.indexOf(this.value)]+'"></div>';
+        else
+            return '<div class="card">'+this.value+'</div>'
+    }
+
 
 
 }
@@ -105,10 +116,12 @@ function Dealer() {
     this.dealCardTo = function (player) {
         this.new_card_dealt_index = getRandomNumberFrom0To(newDeck.length - 1);
         this.new_card_dealt = newDeck[this.new_card_dealt_index];
-        newDeck.splice(this.new_card_dealt_index, 1);
+
         let new_card = new Card(this.new_card_dealt);
         player.receiveCard(new_card);
-        player.setCardHtml(new_card.html);
+        player.setCardHtml(new_card.getHtml());
+        newDeck.splice(this.new_card_dealt_index, 1);
+        newDeckSource.splice(this.new_card_dealt_index,1);
 
 
     };
@@ -151,9 +164,9 @@ function startDealing() {
     dealer.calculateTotalPointFor(house);
     dealer.calculateFinalPointFor(house);
     PLAYER_CARD.innerHTML = player.cards_html;
-    PLAYER_POINT.innerHTML = player.final_point;
+    PLAYER_POINT.innerHTML = 'point= '+player.final_point;
     HOUSE_CARD.innerHTML = house.cards_html;
-    HOUSE_POINT.innerHTML = house.final_point;
+    HOUSE_POINT.innerHTML = 'point= '+house.final_point;
 
 
 }
@@ -196,12 +209,10 @@ function convertCardValuetoNumber(cardvalue) {
 
 }
 function doAfterTheHouseWin(){
-    console.log("The house Win");
     WINNING_SHOW.innerHTML="THE HOUSE WIN";
 }
 
 function doAfterThePlayerWin(){
-    console.log("The Player Win");
     WINNING_SHOW.innerHTML="THE PLAYER WIN";
 
 }
