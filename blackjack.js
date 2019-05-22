@@ -39,9 +39,10 @@ START_DEALING.onclick = function(){
 };
 DEAL_BUTTON.onclick = function () {
     dealer.dealCardTo(player);
-    dealer.calculatePointFor(player);
+    dealer.calculateTotalPointFor(player);
+    dealer.calculateFinalPointFor(player);
     PLAYER_CARD.innerHTML = player.cards_html;
-    PLAYER_POINT.innerHTML = player.point;
+    PLAYER_POINT.innerHTML = player.final_point;
 };
 HOLD_BUTTON.onclick = function () {
     disableButton(HOLD_BUTTON);
@@ -49,21 +50,23 @@ HOLD_BUTTON.onclick = function () {
     disableButton(START_DEALING);
     disableButton(DEAL_BUTTON);
     dealer.dealCardTo(house);
-    dealer.calculatePointFor(house);
-    while (house.point < 17) {
-        dealer.dealCardTo(house);
-        dealer.calculatePointFor(house);
-
-        if (house.point > 21) break;
-    }
+    dealer.calculateTotalPointFor(house);
     while (house.point < player.point) {
         dealer.dealCardTo(house);
-        dealer.calculatePointFor(house);
+        dealer.calculateTotalPointFor(house);
         if (house.point > 21) break;
 
     }
+    while (house.point < 17) {
+        dealer.dealCardTo(house);
+        dealer.calculateTotalPointFor(house);
+
+        if (house.point > 21) break;
+    }
+
+    dealer.calculateFinalPointFor(house);
     HOUSE_CARD.innerHTML = house.cards_html;
-    HOUSE_POINT.innerHTML = house.point;
+    HOUSE_POINT.innerHTML = house.final_point;
 
 };
 
@@ -79,6 +82,7 @@ function Card(value) {
 function Player() {
     this.cards = [];
     this.point = 0;
+    this.final_point=0;
     this.cards_html = "";
     this.receiveCard = function (card) {
         this.cards.push(card.value);
@@ -101,7 +105,7 @@ function Dealer() {
 
 
     };
-    this.calculatePointFor = function (player) {
+    this.calculateTotalPointFor = function (player) {
 
         player.point = 0;
         for (let i = 0; i < player.cards.length; i++) {
@@ -118,6 +122,10 @@ function Dealer() {
             if (player.cards[i][0] === "A") return 1;
         }
         return 0;
+    };
+    this.calculateFinalPointFor=function(player){
+        if(player.point>21) player.final_point=0;
+        else player.final_point=player.point;
     }
 }
 
@@ -126,13 +134,15 @@ function startDealing() {
 
     dealer.dealCardTo(player);
     dealer.dealCardTo(player);
-    dealer.calculatePointFor(player);
+    dealer.calculateTotalPointFor(player);
+    dealer.calculateFinalPointFor(player);
     dealer.dealCardTo(house);
-    dealer.calculatePointFor(house);
+    dealer.calculateTotalPointFor(house);
+    dealer.calculateFinalPointFor(house);
     PLAYER_CARD.innerHTML = player.cards_html;
-    PLAYER_POINT.innerHTML = player.point;
+    PLAYER_POINT.innerHTML = player.final_point;
     HOUSE_CARD.innerHTML = house.cards_html;
-    HOUSE_POINT.innerHTML = house.point;
+    HOUSE_POINT.innerHTML = house.final_point;
 
 
 }
