@@ -1,4 +1,4 @@
-const START_GAME = document.getElementById("start_newgame");
+const NEW_GAME = document.getElementById("new_game");
 const START_DEALING = document.getElementById("start_button");
 const PLAYER_CARD = document.getElementById("player_card");
 const HOUSE_CARD = document.getElementById("house_card");
@@ -6,16 +6,13 @@ const DEAL_BUTTON = document.getElementById("deal_button");
 const HOLD_BUTTON = document.getElementById("hold_button");
 const PLAYER_POINT = document.getElementById("player_point");
 const HOUSE_POINT = document.getElementById("house_point");
-const FULL_CARD_DECK =["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah",
-        "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad",
-        "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac",
-        "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
+const WINNING_SHOW= document.getElementById("winning_show");
 let player;
 let house;
 let dealer;
 let newDeck;
-START_GAME.onclick=function(){
-    disableButton(START_GAME);
+NEW_GAME.onclick=function(){
+    disableButton(NEW_GAME);
     enableButton(START_DEALING);
     enableButton(DEAL_BUTTON);
     enableButton(HOLD_BUTTON);
@@ -31,6 +28,7 @@ START_GAME.onclick=function(){
     HOUSE_CARD.innerHTML="";
     PLAYER_POINT.innerHTML="";
     HOUSE_POINT.innerHTML="";
+    WINNING_SHOW.innerHTML="";
 
 };
 START_DEALING.onclick = function(){
@@ -43,10 +41,17 @@ DEAL_BUTTON.onclick = function () {
     dealer.calculateFinalPointFor(player);
     PLAYER_CARD.innerHTML = player.cards_html;
     PLAYER_POINT.innerHTML = player.final_point;
+    if(dealer.isTheHouseWin(house,player)){
+        doAfterTheHouseWin();
+        disableButton(DEAL_BUTTON);
+        disableButton(HOLD_BUTTON);
+        enableButton(NEW_GAME)
+    }
+
 };
 HOLD_BUTTON.onclick = function () {
     disableButton(HOLD_BUTTON);
-    enableButton(START_GAME);
+    enableButton(NEW_GAME);
     disableButton(START_DEALING);
     disableButton(DEAL_BUTTON);
     dealer.dealCardTo(house);
@@ -67,6 +72,8 @@ HOLD_BUTTON.onclick = function () {
     dealer.calculateFinalPointFor(house);
     HOUSE_CARD.innerHTML = house.cards_html;
     HOUSE_POINT.innerHTML = house.final_point;
+    if(dealer.isTheHouseWin(house,player)) doAfterTheHouseWin();
+    if(!dealer.isTheHouseWin(house,player)) doAfterThePlayerWin();
 
 };
 
@@ -126,6 +133,10 @@ function Dealer() {
     this.calculateFinalPointFor=function(player){
         if(player.point>21) player.final_point=0;
         else player.final_point=player.point;
+    };
+    this.isTheHouseWin=function(house, player){
+        return (player.final_point===0||house.final_point>=player.final_point);
+
     }
 }
 
@@ -184,6 +195,15 @@ function convertCardValuetoNumber(cardvalue) {
 
 
 }
+function doAfterTheHouseWin(){
+    console.log("The house Win");
+    WINNING_SHOW.innerHTML="THE HOUSE WIN";
+}
 
+function doAfterThePlayerWin(){
+    console.log("The Player Win");
+    WINNING_SHOW.innerHTML="THE PLAYER WIN";
+
+}
 
 

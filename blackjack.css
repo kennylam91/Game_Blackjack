@@ -78,3 +78,13 @@ button{
     pointer-events: none
 
 }
+#winning_show{
+    display:block;
+    border: 1px solid black;
+    width: 200px;
+    height: 45px;
+    position:absolute;
+    top:240px;
+    line-height: 45px;
+    text-align: center;
+}
