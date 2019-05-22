@@ -12,10 +12,9 @@
     justify-content: space-evenly;
 
 }
-.start{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+#start_button{
+    display: inline-block;
+
 }
 .playing_area{
     position: absolute;
@@ -45,9 +44,13 @@
 
 }
 .button_area{
+
     position:absolute;
     top:300px;
-    left:100px;
+    left:150px;
+    width:500px;
+    display: flex;
+    justify-content: space-evenly;
 }
 .card{
     display:block;
@@ -64,4 +67,14 @@
     width:100px;
     height:20px;
     top:50px;
+}
+button{
+    height:40px;
+    width:150px;
+    font-size: 16px;
+}
+.button_block{
+    opacity:0.5;
+    pointer-events: none
+
 }

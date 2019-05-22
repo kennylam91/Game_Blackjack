@@ -1,15 +1,42 @@
-const START_BUTTON = document.getElementById("start_button");
-const GAME_SCREEN = document.getElementById("game_screen");
+const START_GAME = document.getElementById("start_newgame");
+const START_DEALING = document.getElementById("start_button");
 const PLAYER_CARD = document.getElementById("player_card");
 const HOUSE_CARD = document.getElementById("house_card");
 const DEAL_BUTTON = document.getElementById("deal_button");
 const HOLD_BUTTON = document.getElementById("hold_button");
 const PLAYER_POINT = document.getElementById("player_point");
 const HOUSE_POINT = document.getElementById("house_point");
+const FULL_CARD_DECK =["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah",
+        "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad",
+        "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac",
+        "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
 let player;
 let house;
 let dealer;
-START_BUTTON.onclick = startGame;
+let newDeck;
+START_GAME.onclick=function(){
+    disableButton(START_GAME);
+    enableButton(START_DEALING);
+    enableButton(DEAL_BUTTON);
+    enableButton(HOLD_BUTTON);
+    dealer = new Dealer();
+    player = new Player(player);
+    house = new Player(house);
+    newDeck = ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah",
+        "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad",
+        "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac",
+        "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
+    console.log(newDeck);
+    PLAYER_CARD.innerHTML="";
+    HOUSE_CARD.innerHTML="";
+    PLAYER_POINT.innerHTML="";
+    HOUSE_POINT.innerHTML="";
+
+};
+START_DEALING.onclick = function(){
+    disableButton(START_DEALING);
+    startDealing();
+};
 DEAL_BUTTON.onclick = function () {
     dealer.dealCardTo(player);
     dealer.calculatePointFor(player);
@@ -17,8 +44,10 @@ DEAL_BUTTON.onclick = function () {
     PLAYER_POINT.innerHTML = player.point;
 };
 HOLD_BUTTON.onclick = function () {
-    console.log("Start");
-    dealer.dealCardTo(house);
+    disableButton(HOLD_BUTTON);
+    enableButton(START_GAME);
+    disableButton(START_DEALING);
+    disableButton(DEAL_BUTTON);
     dealer.dealCardTo(house);
     dealer.calculatePointFor(house);
     while (house.point < 17) {
@@ -38,12 +67,7 @@ HOLD_BUTTON.onclick = function () {
 
 };
 
-const FULL_CARD_DECK =
-    ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah",
-        "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad",
-        "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac",
-        "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
-let card_number_of_full_deck = FULL_CARD_DECK.length;
+
 
 function Card(value) {
     this.value = value;
@@ -52,8 +76,7 @@ function Card(value) {
 
 }
 
-function Player(player) {
-    this.name = player;
+function Player() {
     this.cards = [];
     this.point = 0;
     this.cards_html = "";
@@ -68,14 +91,10 @@ function Player(player) {
 }
 
 function Dealer() {
-
-    this.card_deck = FULL_CARD_DECK;
-    this.card_number_in_deck = card_number_of_full_deck;
     this.dealCardTo = function (player) {
-        this.new_card_dealt_index = getRandomNumberFrom0To(this.card_number_in_deck - 1);
-        this.new_card_dealt = this.card_deck[this.new_card_dealt_index];
-        this.card_deck.splice(this.new_card_dealt_index, 1);
-        this.card_number_in_deck = this.card_deck.length;
+        this.new_card_dealt_index = getRandomNumberFrom0To(newDeck.length - 1);
+        this.new_card_dealt = newDeck[this.new_card_dealt_index];
+        newDeck.splice(this.new_card_dealt_index, 1);
         let new_card = new Card(this.new_card_dealt);
         player.receiveCard(new_card);
         player.setCardHtml(new_card.html);
@@ -83,8 +102,9 @@ function Dealer() {
 
     };
     this.calculatePointFor = function (player) {
+
         player.point = 0;
-        for (i = 0; i < player.cards.length; i++) {
+        for (let i = 0; i < player.cards.length; i++) {
             player.point += convertCardValuetoNumber(player.cards[i]);
         }
         if (this.isThereAceCard(player)) {
@@ -94,7 +114,7 @@ function Dealer() {
 
     };
     this.isThereAceCard = function (player) {
-        for (i = 0; i < player.cards.length; i++) {
+        for (let i = 0; i < player.cards.length; i++) {
             if (player.cards[i][0] === "A") return 1;
         }
         return 0;
@@ -102,23 +122,31 @@ function Dealer() {
 }
 
 
-function startGame() {
-    GAME_SCREEN.classList.add("start");
-    dealer = new Dealer();
-    player = new Player(player);
-    house = new Player(house);
+function startDealing() {
+
     dealer.dealCardTo(player);
     dealer.dealCardTo(player);
     dealer.calculatePointFor(player);
+    dealer.dealCardTo(house);
+    dealer.calculatePointFor(house);
     PLAYER_CARD.innerHTML = player.cards_html;
     PLAYER_POINT.innerHTML = player.point;
+    HOUSE_CARD.innerHTML = house.cards_html;
+    HOUSE_POINT.innerHTML = house.point;
 
 
 }
+function disableButton(button){
+    button.classList.add("button_block");
 
+}
+function enableButton(button){
+    button.classList.remove("button_block");
+
+}
 
 function getRandomNumberFrom0To(number) {
-    return Math.round(Math.random() * number);
+    return Math.floor(Math.random()*number);
 
 }
 
