@@ -12,13 +12,15 @@ const HOUSE_POINT = document.getElementById("house_point");
 const WINNING_SHOW = document.getElementById("winning_show");
 const PLAYER_NAME = document.getElementById("player_name");
 const HOUSE_NAME = document.getElementById("house_name");
+const PLAYER_NAME_INPUT=document.getElementById("name_input");
+const PLAYER_SCORE=document.getElementById("player_score");
+const DEALING_TIME_OUT=200;
 let player;
 let house;
 let dealer;
 let newDeck;
 let newDeckSource;
-let playerNameInput = "The Player";
-let houseNameInput = "The House";
+let playerScore=10;
 START_GAME.onclick = function () {
     GAME_SCREEN.classList.remove("start_background");
     START_GAME.classList.add("disappear");
@@ -29,14 +31,15 @@ START_GAME.onclick = function () {
     disAppear(WINNING_SHOW);
 };
 NEW_HAND.onclick = function () {
+    PLAYER_SCORE.value='score: '+playerScore;
     disAppear(WINNING_SHOW);
     disAppear(NEW_HAND);
     appear(START_DEALING);
     disAppear(DEAL_BUTTON);
     disAppear(HOLD_BUTTON);
     dealer = new Dealer();
-    player = new Player(playerNameInput);
-    house = new Player(houseNameInput);
+    player = new Player(PLAYER_NAME_INPUT.value.toUpperCase());
+    house = new Player("ROYAL CASINO");
     PLAYER_NAME.value = player.name;
     HOUSE_NAME.value = house.name;
     newDeck = ["2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac",
@@ -76,7 +79,7 @@ DEAL_BUTTON.onclick = function () {
         }
 
 
-    },300);
+    },DEALING_TIME_OUT);
 
 };
 HOLD_BUTTON.onclick = function () {
@@ -191,7 +194,7 @@ function startDealing() {
     setTimeout(function(){
         PLAYER_CARD.innerHTML = player.cards_html;
         PLAYER_POINT.innerHTML = player.final_point + ' points';
-    },300);
+    },DEALING_TIME_OUT);
 
     setTimeout(function(){
         dealer.dealCardTo(player);
@@ -199,7 +202,7 @@ function startDealing() {
         dealer.calculateFinalPointFor(player);
         PLAYER_CARD.innerHTML = player.cards_html;
         PLAYER_POINT.innerHTML = player.final_point + ' points';
-    },900);
+    },DEALING_TIME_OUT*3);
 
     dealer.dealCardTo(house);
     dealer.calculateTotalPointFor(house);
@@ -207,7 +210,7 @@ function startDealing() {
     setTimeout(function(){
         HOUSE_CARD.innerHTML = house.cards_html;
         HOUSE_POINT.innerHTML = house.final_point + ' points';
-    },600);
+    },DEALING_TIME_OUT*2);
 
 
 
@@ -260,6 +263,7 @@ function doAfterTheHouseWin() {
     WINNING_SHOW.innerHTML = "THE HOUSE WIN";
     WINNING_SHOW.classList.add("house_win");
     WINNING_SHOW.classList.remove("player_win");
+    playerScore--;
 }
 
 function doAfterThePlayerWin() {
@@ -267,6 +271,7 @@ function doAfterThePlayerWin() {
     appear(WINNING_SHOW);
     WINNING_SHOW.classList.add("player_win");
     WINNING_SHOW.classList.remove("house_win");
+    playerScore++;
 
 }
 function createCookie(name,value){
