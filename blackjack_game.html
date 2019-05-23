@@ -3,30 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>blackjack</title>
+    <link rel="stylesheet" type="text/css" href="blackjack.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
-<link rel="stylesheet" type="text/css" href="blackjack.css">
+
+
 <body>
-<div id="game_screen" class="game_screen">
-    <div class="playing_area" id="house_position">
-        <h2>The House</h2>
+<div id="game_screen" class="game_screen start_background ">
+    <button id="start_game">START GAME</button>
+
+
+    <div id="game_area" class="disappear">
         <div class="div_point" id="house_point"></div>
-        <div class="card_area" id="house_card"></div>
-    </div>
-    <div id="winning_show"></div>
-    <div class="button_area">
-        <button id="new_game">New Game</button>
-        <button class="button_block" id="start_button" >Start Dealing</button>
-        <button class="button_block" id="deal_button" >Deal More Card</button>
-        <button class="button_block" id="hold_button" >Hold</button>
-    </div>
-    <div class="playing_area" id="player_position">
-        <h2>The Player</h2>
         <div class="div_point" id="player_point"></div>
-        <div class="card_area" id="player_card"></div>
+        <div class="playing_area" id="house_position">
+            <input type="text" id="house_name" class="name_input">
+            <div class="card_area" id="house_card"></div>
+        </div>
+        <div id="winning_show" class=""></div>
+        <div class="button_area">
+            <button id="new_game">NEW HAND</button>
+            <button class="" id="start_button">DEAL</button>
+            <button class="" id="deal_button">HIT</button>
+            <button class="" id="hold_button">HOLD</button>
+        </div>
+        <div class="playing_area" id="player_position">
+            <input type="text" id="player_name" class="name_input">
+            <div class="card_area" id="player_card"></div>
 
+
+        </div>
 
     </div>
-
 
 </div>
 

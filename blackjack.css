@@ -2,15 +2,37 @@
     background-color: yellow;
 }
 .game_screen{
-    margin-top:30px;
     position: absolute;
     width:800px;
-    height: 600px;
-    background-color: whitesmoke;
+    height: 450px;
     display:flex;  //thay doi thanh none
     flex-direction:row;
     justify-content: space-evenly;
+    font-family: 'Roboto Condensed', sans-serif;
 
+}
+#game_area{
+    position: absolute;
+    width:800px;
+    height: 450px;
+    background-image: url("./picture/background.png");
+    /*background-color: #7ED3A7;*/
+    display:flex;  //thay doi thanh none
+    flex-direction:row;
+    justify-content: space-evenly;
+    font-family: 'Roboto Condensed', sans-serif;
+
+}
+
+#start_game{
+    position:absolute;
+    bottom:20px;
+    border-radius: 5px;
+}
+.start_background{
+    background-image: url("./picture/start_game_2.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
 }
 #start_button{
     display: inline-block;
@@ -21,58 +43,78 @@
     display: flex;
     justify-content: space-evenly;
     width:60%;
-    height: 30%;
+    height: 40%;
     border:1px solid grey;
+    font-family: 'Roboto Condensed', sans-serif;
 
 }
 #house_position{
 
-    top:50px;
+    top: 10px;
 }
 #player_position{
 
-    bottom:50px;
+    bottom: 10px;
 }
 .card_area{
     position: absolute;
-    width:300px;
-    height: 70px;
-    border:1px black solid;
-    bottom:10px;
+    width:400px;
+    height: 90px;
+    /*border:1px black solid;*/
     display: flex;
     justify-content:space-evenly;
-
 }
 .button_area{
 
     position:absolute;
-    top:300px;
+
+    top: 200px;
+
     left:150px;
+
     width:500px;
+
     display: flex;
+
     justify-content: space-evenly;
+    font-family: 'Roboto Condensed', sans-serif;
+
 }
 .card{
     display:block;
     border: 1px solid black;
     margin:5px;
-    width:40px;
-    height:60px;
+    width:55px;
+    height:80px;
     line-height: 60px;
     text-align: center;
 }
 .div_point{
     position: absolute;
-    border:1px solid black;
-    width:100px;
-    height:20px;
-    top:50px;
+    width:120px;
+    height:50px;
     text-align: center;
+    right:30px;
+    line-height: 50px;
+    font-size: 30px;
+    color:whitesmoke;
+    font-family: 'Roboto Condensed', sans-serif;
+
 }
 button{
+    background:#07A9CF ;
+    color:white;
     height:40px;
     width:150px;
     font-size: 16px;
+    border-radius: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+    cursor: pointer;
+
+
+}
+button:hover{
+    background: #79D6EA;
 }
 .button_block{
     opacity:0.5;
@@ -80,16 +122,62 @@ button{
 
 }
 #winning_show{
-    display:block;
+    display: block;
+    background: #ff6339;
     border: 1px solid black;
     width: 200px;
     height: 45px;
     position:absolute;
-    top:240px;
     line-height: 45px;
     text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+
 }
 img{
     width:100%;
     height: 100%;
+}
+.name_input{
+    display: inline-block;
+    font-size:25px;
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    border:none;
+    background:none;
+    color:floralwhite;
+    font-family: 'Roboto Condensed', sans-serif;
+
+}
+.disappear{
+    display:none!important;
+}
+.appear{
+    display:block!important;
+}
+#house_name{
+    top:10px;
+}
+#house_card{
+    bottom:10px;
+}
+#player_card{
+    top:10px;
+}
+#player_name{
+    bottom:10px;
+}
+#player_point{
+    bottom:80px;
+}
+#house_point{
+    top:80px;
+}
+.player_win{
+   bottom:60px;
+    z-index: 100;
+}
+.house_win{
+    top:60px;
+    z-index: 100;
 }
