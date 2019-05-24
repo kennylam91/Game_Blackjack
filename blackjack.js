@@ -15,7 +15,7 @@ const HOUSE_NAME = document.getElementById("house_name");
 const PLAYER_NAME_INPUT = document.getElementById("player_name_input");
 const PLAYER_SCORE = document.getElementById("player_score");
 const LEADER_BOARD = document.getElementById("leader_board");
-const DEALING_DELAY = 200;
+const DEALING_DELAY = 0;
 let player;
 let house;
 let dealer;
