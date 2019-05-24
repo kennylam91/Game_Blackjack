@@ -1,121 +1,127 @@
-.change{
+.change {
     background-color: yellow;
 }
-.game_screen{
+
+.start_screen {
     position: absolute;
-    width:800px;
+    width: 800px;
     height: 450px;
-    display:flex;  //thay doi thanh none
-    flex-direction:row;
+    display: flex;
+/ / thay doi thanh none flex-direction: row;
     justify-content: space-evenly;
     font-family: 'Roboto Condensed', sans-serif;
 
 }
-#game_area{
+
+#game_screen {
     position: absolute;
-    width:800px;
+    width: 800px;
     height: 450px;
     background-image: url("./picture/background.png");
     /*background-color: #7ED3A7;*/
-    display:flex;  //thay doi thanh none
-    flex-direction:row;
+    display: flex;
+/ / thay doi thanh none flex-direction: row;
     justify-content: space-evenly;
     font-family: 'Roboto Condensed', sans-serif;
 
 }
 
-.input_area{
-    position:absolute;
-    bottom:20px;
+.input_area {
+    position: absolute;
+    bottom: 20px;
     height: 40px;
     display: block;
 }
-#name_input{
+
+#player_name_input {
     display: inline-block;
     height: 30px;
-    padding-top:1px;
-    font-size:25px;
+    padding-top: 1px;
+    font-size: 25px;
     padding-bottom: 5px;
-    width:150px;
+    width: 150px;
 
 }
-.start_background{
+
+.start_background {
     background-image: url("./picture/start_game_2.jpg");
     background-repeat: no-repeat;
-    background-size:cover;
+    background-size: cover;
 }
-#start_button{
+
+#start_dealing_btn {
     display: inline-block;
 
 }
-.playing_area{
+
+.playing_area {
     position: absolute;
     display: flex;
     justify-content: space-evenly;
-    width:60%;
+    width: 60%;
     height: 40%;
-    border:1px solid grey;
+    border: 1px solid grey;
     font-family: 'Roboto Condensed', sans-serif;
 
 }
-#house_position{
+
+#house_position {
 
     top: 10px;
 }
-#player_position{
+
+#player_position {
 
     bottom: 10px;
 }
-.card_area{
+
+.card_area {
     position: absolute;
-    width:400px;
+    width: 400px;
     height: 90px;
-    /*border:1px black solid;*/
     display: flex;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
 }
-.button_area{
 
-    position:absolute;
-
+.button_area {
+    position: absolute;
     top: 200px;
-
-    left:150px;
-
-    width:500px;
-
+    left: 150px;
+    width: 500px;
     display: flex;
-
     justify-content: space-evenly;
     font-family: 'Roboto Condensed', sans-serif;
 
 }
-.card{
-    display:block;
+
+.card {
+    display: block;
     border: 1px solid black;
-    margin:5px;
-    width:55px;
-    height:80px;
+    margin: 5px;
+    width: 55px;
+    height: 80px;
     line-height: 60px;
     text-align: center;
 }
-.div_point{
+
+.div_point {
     position: absolute;
-    width:120px;
-    height:50px;
+    width: 120px;
+    height: 50px;
     text-align: center;
-    right:30px;
+    right: 30px;
     line-height: 50px;
     font-size: 30px;
-    color:whitesmoke;
+    color: whitesmoke;
     font-family: 'Roboto Condensed', sans-serif;
 
 }
-button{
-    background:#07A9CF ;
-    color:white;
-    height:40px;
-    width:150px;
+
+button {
+    background: #07A9CF;
+    color: white;
+    height: 40px;
+    width: 150px;
     font-size: 16px;
     border-radius: 5px;
     font-family: 'Roboto Condensed', sans-serif;
@@ -123,88 +129,105 @@ button{
 
 
 }
-button:hover{
+
+button:hover {
     background: #79D6EA;
 }
-.button_block{
-    opacity:0.5;
-    pointer-events: none
 
+.button_block {
+    opacity: 0.5;
+    pointer-events: none
 }
-#winning_show{
+
+#winning_show {
     display: block;
     background: #ff6339;
     border: 1px solid black;
     width: 150px;
     height: 45px;
-    position:absolute;
+    position: absolute;
     line-height: 45px;
     text-align: center;
     font-family: 'Roboto Condensed', sans-serif;
 }
-img{
-    width:100%;
+
+img {
+    width: 100%;
     height: 100%;
 }
-.name_input{
+
+.name_input {
     display: inline-block;
-    font-size:30px;
+    font-size: 30px;
     position: absolute;
     text-align: center;
     font-weight: bold;
-    border:none;
-    background:none;
-    color:floralwhite;
+    border: none;
+    background: none;
+    color: floralwhite;
     font-family: 'Roboto Condensed', sans-serif;
 
 }
-#player_score{
+
+#player_score {
     position: absolute;
     display: inline-block;
     width: 100px;
     height: 35px;
     top: 196px;
     right: 25px;
-    border-radius:5px;
-    font-size:16px;
+    border-radius: 5px;
+    font-size: 16px;
 }
-.disappear{
-    display:none!important;
+
+.disappear {
+    display: none !important;
 }
-.appear{
-    display:block!important;
+
+.appear {
+    display: block !important;
 }
-#house_name{
-    top:10px;
+
+#house_name {
+    top: 10px;
 }
-#house_card{
-    bottom:10px;
+
+#house_card {
+    bottom: 10px;
 }
-#player_card{
-    top:10px;
+
+#player_card {
+    top: 10px;
 }
-#player_name{
-    bottom:10px;
+
+#player_name {
+    bottom: 10px;
 }
-#player_point{
-    bottom:80px;
+
+#player_point {
+    bottom: 80px;
 }
-#house_point{
-    top:80px;
+
+#house_point {
+    top: 80px;
 }
-.player_win{
+
+.player_win {
     top: 257px;
     right: 3px;
 }
-.house_win{
+
+.house_win {
     top: 144px;
     right: 3px;
 }
-#leader_board{
+
+#leader_board {
     width: 135px;
     height: 95%;
     position: absolute;
     padding: 10px;
+    left: 0;
     font-family: 'Roboto Condensed', sans-serif;
-    color:white;
+    color: white;
 }

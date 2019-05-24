@@ -9,15 +9,15 @@
 
 
 <body>
-<div id="game_screen" class="game_screen start_background ">
+<div id="start_screen" class="start_screen start_background ">
     <div class="input_area">
-        <input type="text" id="name_input" maxlength="10">
-        <button id="start_game">START GAME</button>
+        <input type="text" id="player_name_input" maxlength="10">
+        <button id="start_game_btn">START GAME</button>
 
     </div>
 
 
-    <div id="game_area" class="disappear">
+    <div id="game_screen" class="disappear">
         <div class="div_point" id="house_point"></div>
         <div class="div_point" id="player_point"></div>
         <div class="playing_area" id="house_position">
@@ -27,10 +27,10 @@
         <div id="winning_show" class=""></div>
         <input type="text" id="player_score" value="" disabled>
         <div class="button_area">
-            <button id="new_game">NEW HAND</button>
-            <button class="" id="start_button">DEAL</button>
-            <button class="" id="deal_button">HIT</button>
-            <button class="" id="hold_button">HOLD</button>
+            <button class="" id="new_hand_btn">NEW HAND</button>
+            <button class="" id="start_dealing_btn">START DEALING</button>
+            <button class="" id="hit_btn">HIT</button>
+            <button class="" id="hold_btn">HOLD</button>
         </div>
         <div class="playing_area" id="player_position">
             <input type="text" id="player_name" class="name_input" disabled>
