@@ -31,18 +31,22 @@ HOUSE_POINT.innerHTML = "";
 WINNING_SHOW.innerHTML = "";
 
 START_GAME_BTN.onclick = function () {
-    START_SCREEN.classList.remove("start_background");
-    START_GAME_BTN.classList.add("disappear");
-    GAME_SCREEN.classList.remove("disappear");
-    PLAYER_NAME.value = PLAYER_NAME_INPUT.value.toUpperCase();
-    HOUSE_NAME.value = "ROYAL CASINO";
-    showPlayerScore();
-    showLeaderBoard();
+    if(is_userName(PLAYER_NAME_INPUT.value)){
+        START_SCREEN.classList.remove("start_background");
+        START_GAME_BTN.classList.add("disappear");
+        GAME_SCREEN.classList.remove("disappear");
+        PLAYER_NAME.value = PLAYER_NAME_INPUT.value.toUpperCase();
+        HOUSE_NAME.value = "ROYAL CASINO";
+        showPlayerScore();
+        showLeaderBoard();
 
-    disAppear(START_DEALING_BTN);
-    disAppear(HIT_BTN);
-    disAppear(HOLD_BTN);
-    disAppear(WINNING_SHOW);
+        disAppear(START_DEALING_BTN);
+        disAppear(HIT_BTN);
+        disAppear(HOLD_BTN);
+        disAppear(WINNING_SHOW);
+    }
+    else
+        alert("Username has at least 3 characters and only contain character+number");
 };
 NEW_HAND_BTN.onclick = function () {
     dealer = new Dealer();
@@ -244,4 +248,11 @@ function initNewDeck() {
         "./card_deck/2H.jpg", "./card_deck/3H.jpg", "./card_deck/4H.jpg", "./card_deck/5H.jpg", "./card_deck/6H.jpg", "./card_deck/7H.jpg", "./card_deck/8H.jpg", "./card_deck/9H.jpg", "./card_deck/10H.jpg", "./card_deck/JH.jpg", "./card_deck/QH.jpg", "./card_deck/KH.jpg", "./card_deck/AH.jpg",
         "./card_deck/2D.jpg", "./card_deck/3D.jpg", "./card_deck/4D.jpg", "./card_deck/5D.jpg", "./card_deck/6D.jpg", "./card_deck/7D.jpg", "./card_deck/8D.jpg", "./card_deck/9D.jpg", "./card_deck/10D.jpg", "./card_deck/JD.jpg", "./card_deck/QD.jpg", "./card_deck/KD.jpg", "./card_deck/AD.jpg",
         "./card_deck/2S.jpg", "./card_deck/3S.jpg", "./card_deck/4S.jpg", "./card_deck/5S.jpg", "./card_deck/6S.jpg", "./card_deck/7S.jpg", "./card_deck/8S.jpg", "./card_deck/9S.jpg", "./card_deck/10S.jpg", "./card_deck/JS.jpg", "./card_deck/QS.jpg", "./card_deck/KS.jpg", "./card_deck/AS.jpg",];
+}
+function is_userName(str){
+    regexp=/^[_a-zA-Z0-9]{3,}$/;
+    if(regexp.test(str)){
+        return true;
+    }
+    return false;
 }
