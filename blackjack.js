@@ -30,6 +30,10 @@ PLAYER_POINT.innerHTML = "";
 HOUSE_POINT.innerHTML = "";
 WINNING_SHOW.innerHTML = "";
 
+PLAYER_NAME_INPUT.onclick=function(){
+    PLAYER_NAME_INPUT.value="";
+}
+
 START_GAME_BTN.onclick = function () {
     if(is_userName(PLAYER_NAME_INPUT.value)){
         START_SCREEN.classList.remove("start_background");

@@ -37,9 +37,10 @@
     display: inline-block;
     height: 30px;
     padding-top: 1px;
-    font-size: 25px;
+    font-size: 20px;
     padding-bottom: 5px;
     width: 150px;
+    color: rgba(0, 0, 0, 0.42);
 
 }
 
